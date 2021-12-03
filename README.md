@@ -7,7 +7,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/rtckit/slimswitch-builder.svg)](https://hub.docker.com/r/rtckit/slimswitch-builder)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-Tooling for creating lean FreeSWITCH Docker images; resulting containers are efficient and expose a reduced attack surface. This is achieved by layering only the FreeSWITCH core and modules alongside their its runtime dependencies.
+Tooling for creating lean FreeSWITCH Docker images; resulting containers are efficient and expose a reduced attack surface. This is achieved by layering only the FreeSWITCH core, select modules and their runtime dependencies.
 
 ## Quickstart
 
