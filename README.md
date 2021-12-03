@@ -44,7 +44,7 @@ MIT, see [LICENSE file](LICENSE).
 ### Acknowledgments
 
 * [FreeSWITCH](https://github.com/signalwire/freeswitch), FreeSWITCH is a registered trademark of Anthony Minessale II
-* [Docker](https://docker.com)
+* [Docker](https://docker.com), Docker is a registered trademark of Docker, Inc
 * [docker-slim](https://github.com/docker-slim/docker-slim)
 
 ### Contributing
