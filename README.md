@@ -16,14 +16,16 @@ Decide which FreeSWITCH modules should be included and provide a basic XML core/
 ```sh
 git clone https://github.com/rtckit/slimswitch.git
 cd slimswitch
+
+./bin/mkslim.sh \
+    -m mod_commands -m mod_dptools -m mod_sofia \
+    -s local/awesome-switch
+docker run --rm -it \
+    -v "$(pwd)/freeswitch.xml":/etc/freeswitch/freeswitch.xml \
+    local/awesome-switch:v1.10.7
 ```
 
-```sh
-./bin/mkslim.sh -m mod_commands -m mod_dptools -m mod_sofia -s local/awesome-switch
-docker run --rm -it -v "$(pwd)/freeswitch.xml":/etc/freeswitch/freeswitch.xml local/awesome-switch:v1.10.7
-```
-
-![Quickstart](https://raw.github.com/rtckit/media/master/slimswitch/demo.gif)]
+![Quickstart](https://raw.github.com/rtckit/media/master/slimswitch/demo.gif)
 
 ## Requirements
 
@@ -31,9 +33,9 @@ docker run --rm -it -v "$(pwd)/freeswitch.xml":/etc/freeswitch/freeswitch.xml lo
 
 ## How it works
 
-A generic reusable [builder image](etc/Dockerfile) is created first; the goal is to build the FreeSWITCH core and most of its modules, so then they can be mixed-and-matched as needed. The resulting image can also serve as a base for compiling third party modules. This phase is handled by the `[./bin/mkbuilder.sh](./bin/mkbuilder.sh)` script. Images corresponding to official FreeSWITCH releases are also [publicly available](https://hub.docker.com/r/rtckit/slimswitch-builder).
+A generic reusable [builder image](etc/Dockerfile) is created first; the goal is to build the FreeSWITCH core and most of its modules, so then they can be mixed-and-matched as needed. The resulting image can also serve as a base for compiling third party modules. This phase is handled by the [./bin/mkbuilder.sh](./bin/mkbuilder.sh) script. Images corresponding to official FreeSWITCH releases are also [publicly available](https://hub.docker.com/r/rtckit/slimswitch-builder).
 
-The trimming is achieved via the `[./bin/mkslim.sh](./bin/mkslim.sh)` script, which is essentially a wrapper for docker-slim; specifically, it leverages its static analysis features so dynamic dependencies are accounted for when the final image is created.
+The trimming is achieved via the [./bin/mkslim.sh](./bin/mkslim.sh) script, which is essentially a wrapper for docker-slim; specifically, it leverages its static analysis features so dynamic dependencies are accounted for when the final image is created.
 
 ## License
 
