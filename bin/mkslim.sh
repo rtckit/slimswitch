@@ -117,6 +117,7 @@ docker-slim build \
     --continue-after 1 \
     --include-cert-all \
     --entrypoint=/bin/true \
+    --include-bin=/lib/x86_64-linux-gnu/libnss_dns.so.2 \
     --include-exe=/usr/bin/freeswitch ${MODULE_FLAGS} \
     ${INCLUDE_FLAGS} \
     --exclude-pattern=/bin/true \
