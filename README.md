@@ -22,7 +22,7 @@ cd slimswitch
     -s local/awesome-switch
 docker run --rm -it \
     -v "$(pwd)/freeswitch.xml":/etc/freeswitch/freeswitch.xml \
-    local/awesome-switch:v1.10.7
+    local/awesome-switch:v1.10.8
 ```
 
 ![Quickstart](https://raw.github.com/rtckit/media/master/slimswitch/demo.gif)
