@@ -22,20 +22,20 @@ cd slimswitch
     -s local/awesome-switch
 docker run --rm -it \
     -v "$(pwd)/freeswitch.xml":/etc/freeswitch/freeswitch.xml \
-    local/awesome-switch:v1.10.8
+    local/awesome-switch:v1.10.10
 ```
 
 ![Quickstart](https://raw.github.com/rtckit/media/master/slimswitch/demo.gif)
 
 ## Requirements
 
-[Docker](https://docs.docker.com/get-docker/) and [docker-slim](https://dockersl.im/install.html) must be installed in the building environment.
+[Docker](https://docs.docker.com/get-docker/) and [slimtoolkit](https://slimtoolkit.org/) must be installed in the building environment.
 
 ## How it works
 
 A generic reusable [builder image](etc/Dockerfile) is created first; the goal is to build the FreeSWITCH core and most of its modules, so then they can be mixed-and-matched as needed. The resulting image can also serve as a base for compiling third party modules. This phase is handled by the [./bin/mkbuilder.sh](./bin/mkbuilder.sh) script. Images corresponding to official FreeSWITCH releases are also [publicly available](https://hub.docker.com/r/rtckit/slimswitch-builder).
 
-The trimming is achieved via the [./bin/mkslim.sh](./bin/mkslim.sh) script, which is essentially a wrapper for docker-slim; specifically, it leverages its static analysis features so dynamic dependencies are accounted for when the final image is created.
+The trimming is achieved via the [./bin/mkslim.sh](./bin/mkslim.sh) script, which is essentially a wrapper for slimtoolkit; specifically, it leverages its static analysis features so dynamic dependencies are accounted for when the final image is created.
 
 ## License
 
@@ -45,7 +45,7 @@ MIT, see [LICENSE file](LICENSE).
 
 * [FreeSWITCH](https://github.com/signalwire/freeswitch), FreeSWITCH is a registered trademark of Anthony Minessale II
 * [Docker](https://docker.com), Docker is a registered trademark of Docker, Inc
-* [docker-slim](https://github.com/docker-slim/docker-slim)
+* [slimtoolkit](https://github.com/slimtoolkit/slim)
 
 ### Contributing
 

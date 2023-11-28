@@ -1,23 +1,23 @@
-ARG DEBIAN_RELEASE=bullseye
+ARG DEBIAN_RELEASE=bookworm
 
 # Userland environment of choice
 FROM debian:${DEBIAN_RELEASE}
 
 # Git references for dependencies built from source
-ARG LIB_BROADVOICE_TAG=ec59030
+ARG LIB_BROADVOICE_TAG=85752d8
 ARG LIB_ILBC_TAG=e186393
-ARG LIB_KS_TAG=v1.8.0
+ARG LIB_KS_TAG=v2.0.3
 ARG LIB_SILK_TAG=627102d
-ARG LIB_SPANDSP_TAG=e59ca8f
-ARG LIB_SOFIA_TAG=v1.13.9
-ARG LIB_SW_C_CLIENT=1.3.0
+ARG LIB_SPANDSP_TAG=d540fdf
+ARG LIB_SOFIA_TAG=v1.13.17
+ARG LIB_SW_C_CLIENT=v2.0.0
 
 # FreeSWITCH git reference
-ARG FREESWITCH_TAG=v1.10.8
+ARG FREESWITCH_TAG=v1.10.10
 
 # Prerequisites
 RUN apt-get update && \
-    apt-get install -y autoconf automake build-essential bison cmake debhelper default-jdk devscripts doxygen dpkg-dev erlang-dev flite1-dev g++ gcc git ladspa-sdk libasound2-dev libavformat-dev libavresample-dev libc6-dev libcodec2-dev libcurl4-openssl-dev libdb-dev libedit-dev libexpat1-dev libflac-dev libgdbm-compat-dev libgdbm-dev libglib2.0-dev libhiredis-dev libjpeg62-turbo-dev libldap2-dev libldns-dev liblua5.1-0-dev liblua5.2-dev libmagickcore-dev libmariadb-dev libmemcached-dev libmono-2.0-dev libmp3lame-dev libmpg123-dev libncurses5-dev libogg-dev libopencore-amrnb-dev libopencv-dev libopus-dev libopusfile-dev libpcre3-dev libperl-dev libpq-dev librabbitmq-dev libshout3-dev libsndfile1-dev libsnmp-dev libsoundtouch-dev libspeex-dev libspeexdsp-dev libsqlite3-dev libssl-dev libssl-dev libswscale-dev libtiff5-dev libtool libtool-bin libtpl-dev libnode-dev libvlc-dev libvorbis-dev libyaml-dev make mono-mcs pkg-config portaudio19-dev python-all-dev python-dev-is-python2 python3-dev texlive unixodbc-dev uuid-dev wget yasm zlib1g-dev
+    apt-get install -y autoconf automake build-essential bison cmake debhelper default-jdk devscripts doxygen dpkg-dev erlang-dev flite1-dev g++ gcc git ladspa-sdk libasound2-dev libavformat-dev libc6-dev libcodec2-dev libcurl4-openssl-dev libdb-dev libedit-dev libexpat1-dev libflac-dev libgdbm-compat-dev libgdbm-dev libglib2.0-dev libhiredis-dev libjpeg62-turbo-dev libldap2-dev libldns-dev liblua5.1-0-dev liblua5.2-dev libmagickcore-dev libmariadb-dev libmemcached-dev libmono-2.0-dev libmp3lame-dev libmpg123-dev libncurses5-dev libogg-dev libopencore-amrnb-dev libopencv-dev libopus-dev libopusfile-dev libpcre3-dev libperl-dev libpq-dev librabbitmq-dev libshout3-dev libsndfile1-dev libsnmp-dev libsoundtouch-dev libspeex-dev libspeexdsp-dev libsqlite3-dev libssl-dev libssl-dev libswscale-dev libtiff5-dev libtool libtool-bin libtpl-dev libnode-dev libvlc-dev libvorbis-dev libyaml-dev make mono-mcs pkg-config portaudio19-dev python3-dev python3-distutils-extra texlive unixodbc-dev uuid-dev wget yasm zlib1g-dev
 
 RUN mkdir -p /usr/src
 WORKDIR /usr/src
@@ -70,7 +70,7 @@ RUN wget https://codeload.github.com/signalwire/freeswitch/tar.gz/${FREESWITCH_T
 # Configure
 RUN cd /usr/src/freeswitch* && \
     ./bootstrap.sh -j && \
-    ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-debug
+    ./configure --with-python3 --prefix=/usr --sysconfdir=/etc --localstatedir=/var --disable-debug
 
 # Enable most modules
 RUN cd /usr/src/freeswitch* && \

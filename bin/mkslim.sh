@@ -9,8 +9,8 @@ if [ ! -x "$(command -v docker)" ]; then
     exit 1
 fi
 
-if [ ! -x "$(command -v docker-slim)" ]; then
-    printf "Cannot find docker-slim\n"
+if [ ! -x "$(command -v slim)" ]; then
+    printf "Cannot find slim (slimtoolkit)\n"
     exit 1
 fi
 
@@ -112,7 +112,7 @@ if [ -z "$SLIM_REPOSITORY" ]; then
     SLIM_REPOSITORY=$(printf '%s' "$BUILDER_REPOSITORY" | sed -e 's/-builder/-slim/g')
 fi
 
-docker-slim build \
+slim build \
     --http-probe-off \
     --continue-after 1 \
     --include-cert-all \
